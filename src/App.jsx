@@ -25,11 +25,11 @@ function App ()
 
     return (
         <div id="app">
-            <div className='menu-inicio'>
+            {/* <div className='menu-inicio'>
                 <h2>Bienvenido a Criss-Game</h2>
                 <p>Haz click en el botón para empezar el juego</p>
                 <button onClick={cerrarMenu}>Empezar</button>
-            </div>
+            </div> */}
             <PhaserGame />
         </div>
     )

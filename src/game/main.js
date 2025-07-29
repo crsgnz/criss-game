@@ -18,7 +18,7 @@ const config = {
             debug: false,
         }
     },
-    backgroundColor: '#000000',
+    backgroundColor: '#1A1A2E',
     scene: [
         MainGame
     ]
