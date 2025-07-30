@@ -13,10 +13,24 @@ export class Game extends Scene
         super('Game');
         this.core = null;
         this.debrisGroup = null;
-        this.score = 0;
+        this._resources = {
+            scraps: 0,
+            chips: 0,
+            wiring: 0,
+        };
         this.debrisTimer = 0;
         this.debrisKeys = []
         this.stars = null;
+    }
+
+    get resources(){
+        return this._resources;
+    }
+
+    set resources(newResources){
+        const oldResources = { ...this._resources };
+        this._resources = { ...newResources };
+        EventBus.emit('resources-updated', this._resources);
     }
 
     preload ()
@@ -26,6 +40,10 @@ export class Game extends Scene
         this.load.image('core','core.png');
         this.load.image('debris', 'scrap01.png');
         this.load.image('debris2', 'scrap02.png');
+        this.load.image('debris3', 'scrap03.png');
+        this.load.image('debris4', 'scrap04.png');
+        this.load.image('debris5', 'scrap05.png');
+        this.load.image('debris6', 'scrap06.png');
     }
     
     create ()
@@ -35,7 +53,7 @@ export class Game extends Scene
         
         this.stars = createStars(this, 250, this.width, this.height);
 
-        this.debrisKeys = ['debris', 'debris2'];
+        this.debrisKeys = ['debris', 'debris2', 'debris3', 'debris4', 'debris5', 'debris6'];
 
         this.core = new Astrocore(this, this.width / 2, this.height / 2, 'core');
         this.core.setBounce(0.2);
@@ -45,15 +63,17 @@ export class Game extends Scene
         this.debrisSpawner = new DebrisSpawner(this, this.debrisGroup, this.debrisKeys, 1500);
         this.debrisSpawner.start();
 
-        setUpDebrisCollection(this, this.core, this.debrisGroup)
+        setUpDebrisCollection(this, this.core, this.debrisGroup);
 
-        this.scoreText = this.add.text(16, 16, 'Scraps: 0', { fontSize: '32px', fill: '#fff' });
-        this.scoreText.setScrollFactor(0);
+        this.resources = { ...this.resources };
     }   
 
 
     update ()
-    {  
+    {
+        if(this.core){
+            this.core.update();
+        }
         updateStars(this.stars, this.width, this.height);    
     }
 }

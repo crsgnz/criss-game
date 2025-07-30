@@ -1,8 +1,7 @@
-
-import Phaser from 'phaser';
 import { PhaserGame } from './PhaserGame';
 import { EventBus } from './game/EventBus';
-import './menu-inicio/menu-inicio.css';
+import Interfaz from './Interfaz';
+import './css/menu-inicio.css';
 
 function App ()
 {
@@ -30,6 +29,7 @@ function App ()
                 <p>Haz click en el botón para empezar el juego</p>
                 <button onClick={cerrarMenu}>Empezar</button>
             </div> */}
+            <Interfaz />
             <PhaserGame />
         </div>
     )

@@ -1,0 +1,20 @@
+.interfaz{
+    position: absolute;;
+    display: flex;
+    gap: 25px;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    font-size: 1.4em;
+    color: white;
+    pointer-events: none;
+}
+.score {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.icon{
+    width: 24px;
+    height: 24px;
+}

@@ -5,12 +5,19 @@ export class Debris extends Phaser.Physics.Arcade.Image {
         super(scene, x, y, textureKey);
         scene.add.existing(this);
         this.setScale(0.25);
+
+        this.resources = {};
     }
-    activate(x, y, textureKey) {
+    activate(x, y, textureKey, resources) {
         this.setTexture(textureKey);
         this.setPosition(x, y);
         this.setActive(true);
         this.setVisible(true);
+
+        this.resources = { ...resources};
+        if(this.resources.scraps === undefined) this.resources.scraps = 0;
+        if(this.resources.chips === undefined) this.resources.chips = 0;
+        if(this.resources.wiring === undefined) this.resources.wiring = 0;
 
         if(!this.body) {
             this.scene.physics.world.enable(this);
@@ -37,5 +44,6 @@ export class Debris extends Phaser.Physics.Arcade.Image {
         this.body.disableBody(true, true);
         this.body.setVelocity(0, 0);
         this.body.setAngularVelocity(0);
+        this.resources = {};
     }
 }
